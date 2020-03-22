@@ -46,15 +46,21 @@ final class Toolkit {
     }
 
     /**
+     * For multiples of 3, instead of the number, print "Linio".
+     * For multiples of 5 print "IT".
+     * For numbers which are multiples of both 3 and 5, print "Linianos"
+     *
      * @param $number
      *
      * @return string
      */
     public function replaceMeIf ($number): string {
-        $type = $this->isMultipleOf($number, $this->getMultReplacements()['IT']);
-        $type .= $this->isMultipleOf($number, $this->getMultReplacements()['Linio']);
-        if (isset($this->getStringReplacements()[$type])) {
-            return (string)$this->getStringReplacements()[$type];
+        // Check if it's replaceable by IT
+        $case = $this->isMultipleOf($number, $this->getMultReplacements()['IT']);
+        // Check if it's (also) replaceable by Linio
+        $case .= $this->isMultipleOf($number, $this->getMultReplacements()['Linio']);
+        if (isset($this->getStringReplacements()[$case])) {
+            return (string)$this->getStringReplacements()[$case];
         }
         return (string)$number;
     }
